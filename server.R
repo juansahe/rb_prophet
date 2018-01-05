@@ -1,16 +1,16 @@
 #
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
+# Prophet 2.0 (semantic UI implementation and Rb data integratin)
+# run over EC2 AWS server (t2.large)
+# January 5 2018 -- jds --
+# Server segment code
 # 
-#    http://shiny.rstudio.com/
+#    http://theprophet.co
+#
 #
 
-library(shiny)
-library(shiny.semantic)
+source('helpers.R')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-   
+   router(input, output)
 })

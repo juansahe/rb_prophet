@@ -1,31 +1,23 @@
 #
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
+# Prophet 2.0 (semantic UI implementation and Rb data integratin)
+# run over EC2 AWS server (t2.large)
+# January 5 2018 -- jds --
+# UI segment code
 # 
-#    http://shiny.rstudio.com/
+#    http://theprophet.co
+#
 #
 
-library(shiny)
-library(shiny.semantic)
-library(shinyjs)
-library(tidyverse)
+source('helpers.R')
 
-# Define UI for application that draws a histogram
 shinyUI(semanticPage(
   
   # Application title
   title ="Prophet (rb-mjn)",
   shinyjs::useShinyjs(),
   suppressDependencies('bootstrap'),
-  div(class = 'wrapper', style ='min-height: 100%',
-      div(class = 'ui five item stackable container menu',
-          div(class = 'item', img(src='../img/rb_mjn_logo.png', style = 'width: 150px;')),
-          a(class = 'item', id="forecast_actions", uiicon('hourglass end icon'), 'Forecast'),
-          a(class = 'item', id="history_actions", uiicon('archive icon'), 'Historic data'),
-          a(class = 'item', id="doi_actions", uiicon('cube icon'), 'Days of Inventory'),
-          a(class = 'item', id="logout_action", uiicon('logout icon'), 'Logout')
-          )
-      )
+  router_ui()
 ))
+
+
+
