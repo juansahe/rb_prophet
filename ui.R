@@ -13,7 +13,7 @@ source('helpers.R')
 shinyUI(semanticPage(
   
   # Application title
-  title ="Prophet (rb-mjn)",
+  title ="Prophet 2.0",
   shinyjs::useShinyjs(),
   suppressDependencies('bootstrap'),
   extendShinyjs(text = jscode, functions = c("navigate")),
