@@ -11,6 +11,9 @@
 source('helpers.R')
 
 # Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-   router(input, output)
+shinyServer(function(input, output, session) {
+  router(input, output)
+  output$logout_call <- renderUI({
+    onclick("logout_action", js$navigate('https://theprophet.co/logout'))
+  })
 })

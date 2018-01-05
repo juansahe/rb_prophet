@@ -16,6 +16,7 @@ shinyUI(semanticPage(
   title ="Prophet (rb-mjn)",
   shinyjs::useShinyjs(),
   suppressDependencies('bootstrap'),
+  extendShinyjs(text = jscode, functions = c("navigate")),
   router_ui()
 ))
 
