@@ -12,5 +12,8 @@ source('helpers.R')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
+  observe({
+    shinyjs::onclick("logout_action", js$navigate('http://theprophet.co/logout'))
+  })
   router(input, output)
 })

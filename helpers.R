@@ -9,7 +9,7 @@ library(shiny.router)
 jscode <- "
 // Define a JavaScript function to navigate the page to where the file is served
 shinyjs.navigate = function(url) {
-window.location.replace = url;
+window.location.href = url;
 }
 "
 
@@ -21,7 +21,7 @@ headerMenu <- (
       a(class = 'item', href="/forecast", uiicon('hourglass end icon'), 'Forecast'),
       a(class = 'item', href="/history", uiicon('archive icon'), 'Historic data'),
       a(class = 'item', href="/doi", uiicon('cube icon'), 'Days of Inventory'),
-      a(class = 'item', href="/logout", uiicon('logout icon'), 'Logout')
+      a(class = 'item', id='logout_action', href="#", uiicon('logout icon'), 'Logout')
   )
 )
 
@@ -37,11 +37,14 @@ renderedPage <- function(title, content) {
   )
 }
 
+callOut <- function(url){
+  browseURL(url)
+}
+
 root_page <- renderedPage("Home", "LoremIpsum 11")
 other_page <- renderedPage("Other", "Loremipsum 2")
 
 router <- make_router(
   route("/", root_page),
-  route("/forecast", other_page),
-  route("/logout", '#')
+  route("/forecast", other_page)
 )
