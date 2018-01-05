@@ -21,7 +21,7 @@ shinyUI(semanticPage(
   suppressDependencies('bootstrap'),
   div(class = 'wrapper', style ='min-height: 100%',
       div(class = 'ui four item stackable container menu',
-          div(class = 'item', img(src='../img/rb_logo_220.png', style = 'height: 30px;')),
+          #div(class = 'item', img(src='../img/rb_logo_220.png', style = 'height: 30px;')),
           a(class = 'item', id="forecast_actions", uiicon('hourglass end icon'), 'Forecast'),
           a(class = 'item', id="history_actions", uiicon('archive icon'), 'Historic data'),
           a(class = 'item', id="doi_actions", uiicon('cube icon'), 'Days of Inventory'),
