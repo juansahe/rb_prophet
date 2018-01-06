@@ -14,16 +14,19 @@ source('helpers.R')
 shinyServer(function(input, output, session) {
   shinyjs::onclick("logout_action", js$navigate('http://theprophet.co/logout'))
   router(input, output)
+  auth0_tenant=Sys.getenv('AUTH0_TENANT')
+  jwk_auth0 =  fromJSON(getURL(paste0("https://",auth0_tenant,".auth0.com/.well-known/jwks.json")))$keys[[1]]
+  jwk_key <- read_jwk(jwk_auth0)
   
-  # headers
-  output$headers <- renderUI({
-    selectInput("header", "Header:", ls(env=session$request))
+  user <- reactive({
+    req(input$accTok)
+    ## This step will fail if the JWT is invalid, it's decrypting the JWT with the JWK.
+    res = jwt_decode_sig(input$accTok, pubkey=jwk_key)
+    res
   })
   
   output$value <- renderText({
-    if (nchar(input$header) < 1 || !exists(input$header, envir=session$request)){
-      return("NULL");
-    }
-    return (get(input$header, envir=session$request));
+    res = user()
+    return(paste(names(unlist(res)), ": ", unlist(res), collapse='\n'))
   })
 })

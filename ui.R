@@ -16,7 +16,9 @@ shinyUI(semanticPage(
   title ="Prophet 2.0",
   shinyjs::useShinyjs(),
   suppressDependencies('bootstrap'),
-  extendShinyjs(text = jscode, functions = c("navigate")),
+  extendShinyjs(text = jscode, functions = c("navigate", "localStorageInfo")),
+  HTML(' <input type="text" id="accTok" name="accTok" style="display: none;"> '),
+  singleton(js$localStorageInfo),
   router_ui()
 ))
 

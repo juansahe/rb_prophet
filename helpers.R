@@ -5,18 +5,30 @@ library(shiny.semantic)
 library(shinyjs)
 library(tidyverse)
 library(shiny.router)
+library(RCurl)
+library(RJSONIO)
+library(jose)
+library(dotenv)
+load_dot_env('.env')
 
 jscode <- "
 // Define a JavaScript function to navigate the page to where the file is served
 shinyjs.navigate = function(url) {
-window.location.href = url;
+  window.location.href = url;
+}
+shinyjs.localStorageInfo = function() {
+$(document).ready(function() {
+  var accToken = localStorage['accessToken'];
+  var accField = document.getElementById('accTok');
+  accField.value = accToken; 
+  });
 }
 "
 
 headerMenu <- (
   div(class = 'ui five item stackable container menu',
       div(class = 'item', 
-          a(href="/", img(src='../img/rb_mjn_logo.png', style = 'width: 95px;'))
+          a(href="/", img(src='/images/rb_mjn_logo.png', style = 'width: 95px;'))
           ),
       a(class = 'item', href="/forecast", uiicon('hourglass end icon'), 'Forecast'),
       a(class = 'item', href="/history", uiicon('archive icon'), 'Historic data'),
@@ -32,7 +44,6 @@ renderedPage <- function(title, content) {
           div(class = "ui segment",
               h1(title),
               p(content),
-              uiOutput("headers"),
               verbatimTextOutput("value")
           )
       )
