@@ -26,6 +26,6 @@ shinyServer(function(input, output, session) {
   
   output$value <- renderText({
     res = user()
-    return(res$scope))
+    return(res$scope)
   })
 })
