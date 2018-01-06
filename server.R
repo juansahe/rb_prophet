@@ -26,6 +26,6 @@ shinyServer(function(input, output, session) {
   
   output$value <- renderText({
     res = user()
-    return(res$scope$email)
+    return(paste(names(unlist(res)), ": ", unlist(res), collapse='\n'))
   })
 })
