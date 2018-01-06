@@ -20,13 +20,12 @@ shinyServer(function(input, output, session) {
   
   user <- reactive({
     req(input$accTok)
-    ## This step will fail if the JWT is invalid, it's decrypting the JWT with the JWK.
     res = jwt_decode_sig(input$accTok, pubkey=jwk_key)
     res
   })
   
   output$value <- renderText({
     res = user()
-    return(paste(names(unlist(res)), ": ", unlist(res), collapse='\n'))
+    return(res$scope))
   })
 })
