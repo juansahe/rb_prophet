@@ -18,7 +18,7 @@ shinyUI(semanticPage(
   suppressDependencies('bootstrap'),
   extendShinyjs(text = jscode, functions = c("navigate", "localStorageInfo")),
   HTML(' <input type="text" id="accTok" name="accTok" style="display: none;"> '),
-  singleton(js$localStorageInfo),
+  singleton(tags$head(tags$script(src="accessToken.js"))),
   router_ui()
 ))
 

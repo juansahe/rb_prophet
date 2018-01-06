@@ -16,13 +16,6 @@ jscode <- "
 shinyjs.navigate = function(url) {
   window.location.href = url;
 }
-shinyjs.localStorageInfo = function() {
-$(document).ready(function() {
-  var accToken = localStorage['accessToken'];
-  var accField = document.getElementById('accTok');
-  accField.value = accToken; 
-  });
-}
 "
 
 headerMenu <- (
@@ -44,7 +37,7 @@ renderedPage <- function(title, content) {
           div(class = "ui segment",
               h1(title),
               p(content),
-              verbatimTextOutput("value")
+              pre(textOutput("value"))
           )
       )
   )
