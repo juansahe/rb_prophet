@@ -14,4 +14,16 @@ source('helpers.R')
 shinyServer(function(input, output, session) {
   shinyjs::onclick("logout_action", js$navigate('http://theprophet.co/logout'))
   router(input, output)
+  
+  # headers
+  output$headers <- renderUI({
+    selectInput("header", "Header:", ls(env=session$request))
+  })
+  
+  output$value <- renderText({
+    if (nchar(input$header) < 1 || !exists(input$header, envir=session$request)){
+      return("NULL");
+    }
+    return (get(input$header, envir=session$request));
+  })
 })

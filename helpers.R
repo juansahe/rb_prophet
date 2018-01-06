@@ -31,20 +31,25 @@ renderedPage <- function(title, content) {
       div(class = "twelve wide column",
           div(class = "ui segment",
               h1(title),
-              p(content)
+              p(content),
+              uiOutput("headers"),
+              verbatimTextOutput("value")
           )
       )
   )
 }
 
-callOut <- function(url){
-  browseURL(url)
-}
+# db_connection
 
+# call to pages
 root_page <- renderedPage("Home", "LoremIpsum 11")
-other_page <- renderedPage("Other", "Loremipsum 2")
+forecast_page <- renderedPage("Forecast", "Loremipsum 2")
+history_page <- renderedPage("History", "Loremipsum 2")
+doi_page <- renderedPage("Days of Inventory", "Loremipsum 2")
 
 router <- make_router(
   route("/", root_page),
-  route("/forecast", other_page)
+  route("/forecast", forecast_page),
+  route("/history", history_page),
+  route("/doi", doi_page)
 )
