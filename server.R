@@ -15,19 +15,13 @@ shinyServer(function(input, output, session) {
   shinyjs::onclick("logout_action", js$navigate('http://theprophet.co/logout'))
   router(input, output)
   
-  auth0_tenant=Sys.getenv('AUTH0_TENANT')
-  jwk_auth0 =  fromJSON(getURL(paste0("https://",auth0_tenant,".auth0.com/.well-known/jwks.json")))$keys[[1]]
-  jwk_key <- read_jwk(jwk_auth0)
-  
   user_data <- reactive({
     req(input$accTok)
-    
     res = jwt_decode_sig(input$accTok, pubkey=jwk_key)
-    res
-    #req <- httr::GET(res$aud[[2]], httr::add_headers(Authorization = paste("Bearer", input$accTok)))
-    #json <- httr::content(req, as="text")
-    #user_data <- fromJSON(json)
-    #user_data
+    req <- httr::GET(res$aud[[2]], httr::add_headers(Authorization = paste("Bearer", input$accTok)))
+    json <- httr::content(req, as="text")
+    user_data <- fromJSON(json)
+    user_data
   })
   
   output$value <- renderText({
