@@ -9,6 +9,7 @@ library(RCurl)
 library(RJSONIO)
 library(jose)
 library(dotenv)
+library(httr)
 load_dot_env('.env')
 
 jscode <- "
