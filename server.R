@@ -25,6 +25,7 @@ shinyServer(function(input, output, session) {
     req <- httr::GET(res$aud[[2]], httr::add_headers(Authorization = paste("Bearer", actOk)))
     json <- httr::content(req, as="text")
     user_data <- fromJSON(json)
+    user_data
   })
   
   output$value <- renderText({
