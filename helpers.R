@@ -18,10 +18,6 @@ shinyjs.navigate = function(url) {
   window.location.href = url;
 }
 "
-auth0_tenant=Sys.getenv('AUTH0_TENANT')
-jwk_auth0 =  fromJSON(getURL(paste0("https://",auth0_tenant,".auth0.com/.well-known/jwks.json")))$keys[[1]]
-jwk_key <- read_jwk(jwk_auth0)
-
 headerMenu <- (
   div(class = 'ui five item stackable container menu',
       div(class = 'item', 
