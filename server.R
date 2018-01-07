@@ -22,7 +22,7 @@ shinyServer(function(input, output, session) {
     req(input$accTok)
     res = jwt_decode_sig(input$accTok, pubkey=jwk_key)
     
-    req <- httr::GET(res$aud[[2]], httr::add_headers(Authorization = paste("Bearer", actOk)))
+    req <- httr::GET(res$aud[[2]], httr::add_headers(Authorization = paste("Bearer", input$accTok)))
     json <- httr::content(req, as="text")
     user_data <- fromJSON(json)
     user_data
